@@ -1250,6 +1250,12 @@ def do_resize(cs, args):
 
 
 @utils.arg('server', metavar='<server>', help='Name or ID of server.')
+def do_wake_up(cs, args):
+    """Wake up reserved instance."""
+    _find_server(cs, args.server).wake_up()
+
+
+@utils.arg('server', metavar='<server>', help='Name or ID of server.')
 def do_resize_confirm(cs, args):
     """Confirm a previous resize."""
     _find_server(cs, args.server).confirm_resize()

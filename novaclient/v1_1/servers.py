@@ -280,6 +280,10 @@ class Server(base.Resource):
         """
         self.manager.backup(self, backup_name, backup_type, rotation)
 
+    def wake_up(self):
+        """Wake up reserved instance."""
+        self.manager.wake_up(self)
+
     def confirm_resize(self):
         """
         Confirm that the resize worked, thus removing the original server.
@@ -786,6 +790,9 @@ class ServerManager(base.BootingManagerWithFind):
             info['OS-DCF:diskConfig'] = disk_config
 
         self._action('resize', server, info=info, **kwargs)
+
+    def wake_up(self, server):
+        self._action('wakeUp', server)
 
     def confirm_resize(self, server):
         """
